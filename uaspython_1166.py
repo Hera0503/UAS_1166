@@ -54,11 +54,42 @@ elif menu == "2":
 elif menu == "3":
     st.subheader("✏️ Ubah Pasien")
     data = st.session_state.data_pasien
-    
+    data = st.session_state.data_pasien
+    if data:
+        st.write("Daftar Pasien:")
+        for i, psn in enumerate(data):
+            st.write(f"{i+1}. {psn}")
+            
+        pilihan = st.number_input("Pilih nomor pasien yang ingin diubah:", min_value=1, max_value=len(data), step=1)
+        selected = data[pilihan-1]
+        
+        new_nama = st.text_input("Nama baru", value=selected.nama)
+        new_usias = st.text_input("Usia baru", value=selected.usia)
+        new_diagnosa = st.text_input("Diagnosa baru", value=selected.diagnosa)
+        
+        if st.button("Simpan Perubahan"):
+            selected.nama = new_nama
+            selected.usia = new_usias
+            selected.diagnosa = new_diagnosa
+            st.success("Data berhasil diubah!")
+    else:
+        st.info("Belum ada data.")
 
 elif menu == "4":
     st.subheader("🗑️ Hapus Pasien")
-    
+    data = st.session_state.data_pasien
+    if data:
+        st.write("Daftar Pasien:")
+        for i, psn in enumerate(data):
+            st.write(f"{i+1}. {psn}")
+            
+        pilihan = st.number_input("Pilih nomor pasien yang ingin dihapus:", min_value=1, max_value=len(data), step=1)
+        
+        if st.button("Hapus"):
+            deleted = data.pop(pilihan-1)
+            st.success(f"Data {deleted.nama} berhasil dihapus!")
+    else:
+        st.info("Belum ada data.")
 
 elif menu != "":
     st.warning("Masukkan angka 1 - 4 sesuai menu.")
