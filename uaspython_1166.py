@@ -44,7 +44,7 @@ elif menu == "2":
     usia = st.text_input("Masukkan Usia")
     diagnosa = st.text_input("Masukkan diagnosa")
     if st.button("Simpan"):
-        if nim and nama:
+        if id and nama:
             psn = Pasien(id, nama)
             st.session_state.data_pasien.append(psn)
             st.success("Data berhasil ditambahkan.")
